@@ -131,31 +131,31 @@ sudo chmod a+w /mnt/vdb1
  pg_global  | postgres |
 
 Создал БД в своем табличном пространстве
-postgres=# create database test_kom tablespace komarov_ts;
+>postgres=# create database test_kom tablespace komarov_ts;
 
 Создал таблицы для теста переноса данных между табличными пространствами
-test_kom=# create table test_kom1 (id int);
+>test_kom=# create table test_kom1 (id int);
 CREATE TABLE
-test_kom=# insert into test_kom1 select g.x from generate_series(1,10) as g(x);
+>test_kom=# insert into test_kom1 select g.x from generate_series(1,10) as g(x);
 INSERT 0 10
-test_kom=# create table test_kom2 (id int);
+>test_kom=# create table test_kom2 (id int);
 CREATE TABLE
-test_kom=# drop table test_kom2;
+>test_kom=# drop table test_kom2;
 DROP TABLE
-test_kom=# create table test_kom2 (id int) tablespace pg_default;
+>test_kom=# create table test_kom2 (id int) tablespace pg_default;
 CREATE TABLE
-test_kom=# insert into test_kom2 select g.x from generate_series(1,10) as g(x);
+>test_kom=# insert into test_kom2 select g.x from generate_series(1,10) as g(x);
 INSERT 0 10
-test_kom=# select tablename,tablespace  from pg_tables where schemaname='public';
+>test_kom=# select tablename,tablespace  from pg_tables where schemaname='public';
  tablename | tablespace
 -----------+------------
  test_kom1 |
  test_kom2 | pg_default
 
 Перенес таблицу из табличного пространства по умолчанию в свое табличное пространство
-test_kom=# alter table test_kom2 set tablespace komarov_ts;
+>test_kom=# alter table test_kom2 set tablespace komarov_ts;
 ALTER TABLE
-test_kom=# select tablename,tablespace  from pg_tables where schemaname='public';
+>test_kom=# select tablename,tablespace  from pg_tables where schemaname='public';
  tablename | tablespace
 -----------+------------
  test_kom1 |
@@ -163,7 +163,7 @@ test_kom=# select tablename,tablespace  from pg_tables where schemaname='public'
 
 
 Проверил содержимое двух ранее созданных таблиц 
-test_kom=# select*from test_kom1;
+>test_kom=# select*from test_kom1;
  id
 ----
   1
@@ -178,7 +178,7 @@ test_kom=# select*from test_kom1;
  10
 (10 rows)
 
-test_kom=# select*from test_kom2;
+>test_kom=# select*from test_kom2;
  id
 ----
   1
