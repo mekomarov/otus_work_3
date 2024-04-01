@@ -1,5 +1,3 @@
-# otus_work_3
-Выполнение заданий OTUS
 Подключение к ВМ созданной в YC (yandex cloud) 
 >ssh -i ~/.ssh/id_ed25519 komarov@158.160.130.76
 
